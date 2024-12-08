@@ -1,0 +1,172 @@
+$theme-background-color: hsl(124, 55%, 23%);
+$theme-foreground-color: hsl(0, 100%, 100%);
+$theme-anchor-color: hsl(53, 100%, 61%);
+$theme-anchor-color-visited: hsl(28, 91%, 52%);
+$theme-anchor-color-active: hsl(42, 96%, 58%);
+
+@mixin theme-colors {
+  background-color: $theme-background-color;
+  color: $theme-foreground-color;
+
+  a {
+    color: $theme-anchor-color;
+
+    &:visited {
+      color: $theme-anchor-color-visited;
+    }
+
+    &:active {
+      color: $theme-anchor-color-active;
+    }
+  }
+}
+
+@mixin horizontal-grid {
+  display: grid;
+  grid-template-columns: 50% 1fr;
+  align-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+@mixin vertical-grid {
+  display: grid;
+  align-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+@mixin intermediate-border {
+  & > :not(:last-child) {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid;
+  }
+}
+
+@mixin content-margin {
+  & > :not(:last-child) {
+    margin-bottom: 1em;
+  }
+}
+
+@mixin list-with-fa {
+  padding-left: 1rem;
+}
+
+:root {
+  /* Assumes the Full HD is common size for all devices. */
+  --device-width: 1920px;
+  --device-height: 1080px;
+  --device-pixel-ratio: 1;
+
+  @media (min-resolution: 2dppx) {
+    --device-pixel-ratio: 2;
+  }
+
+  @media (min-resolution: 2.5dppx) {
+    --device-pixel-ratio: 2.5;
+  }
+
+  @media (min-resolution: 3dppx) {
+    --device-pixel-ratio: 3;
+  }
+
+  @media (orientation: landscape) {
+    @media (min-width: 426px) {
+      --device-width: 426px;
+      --device-height: 240px;
+    }
+
+    @media (min-width: 640px) {
+      --device-width: 640px;
+      --device-height: 360px;
+    }
+
+    @media (min-width: 853px) {
+      --device-width: 853px;
+      --device-height: 480px;
+    }
+
+    @media (min-width: 960px) {
+      --device-width: 960px;
+      --device-height: 540px;
+    }
+
+    @media (min-width: 1280px) {
+      --device-width: 1280px;
+      --device-height: 720px;
+    }
+
+    @media (min-width: 1920px) {
+      --device-width: 1920px;
+      --device-height: 1080px;
+    }
+
+    @media (min-width: 2560px) {
+      --device-width: 2560px;
+      --device-height: 1440px;
+    }
+
+    @media (min-width: 3840px) {
+      --device-width: 3840px;
+      --device-height: 2160px;
+    }
+  }
+
+  @media (orientation: portrait) {
+    @media (min-height: 426px) {
+      --device-height: 426px;
+      --device-width: 240px;
+    }
+
+    @media (min-height: 640px) {
+      --device-height: 640px;
+      --device-width: 360px;
+    }
+
+    @media (min-height: 853px) {
+      --device-height: 853px;
+      --device-width: 480px;
+    }
+
+    @media (min-height: 960px) {
+      --device-height: 960px;
+      --device-width: 540px;
+    }
+
+    @media (min-height: 1280px) {
+      --device-height: 1280px;
+      --device-width: 720px;
+    }
+
+    @media (min-height: 1920px) {
+      --device-height: 1920px;
+      --device-width: 1080px;
+    }
+
+    @media (min-height: 2560px) {
+      --device-height: 2560px;
+      --device-width: 1440px;
+    }
+
+    @media (min-height: 3840px) {
+      --device-height: 3840px;
+      --device-widht: 2160px;
+    }
+  }
+}
+
+@font-face {
+  font-family: 'BIZ UD PMincho';
+  src: url('/fonts/BIZUDPMincho-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  src: url('/fonts/SourceCodePro-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Noto Sans Math';
+  src: url('/fonts/NotoSansMath-Regular.ttf') format('truetype');
+}

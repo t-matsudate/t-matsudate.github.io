@@ -1,0 +1,82 @@
+---
+import Header from '@components/Header.astro';
+import Menu from '@components/Menu.astro';
+import Footer from '@components/Footer.astro';
+
+const { title, headings, description } = Astro.props;
+const currentPath = Astro.routePattern;
+---
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+  <head>
+    <title>{title ? title + ' - Func::"main' : 'Func::main'}</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initail-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="func,funchs,func_hs,func-hs,tsuyoshi,matsudate,tmatsudate,t-matsudate,剛志,松舘,松舘剛志,プログラミング,スマホ,スマートフォン,android,termux,ubuntu,rust,php,javascript,typescript,html,css" />
+    <meta name="robots" content="index,follow" />
+    <meta name="googlebot" content="index,follow" />
+    <meta property="og:title" content={title ? title + ' - Func::main' : 'Func::main'} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://t-matsudate.github.io/images/myface.png" />
+    <meta property="og:url" content={'https://t-matsudate.github.io' + currentPath} />
+    <meta property="og:description" content={description} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </head>
+  <body>
+    <div id="default-layout">
+      <Header title={title} />
+      <div>
+        <Menu headings={headings} />
+        <slot />
+        <Footer />
+      </div>
+    </div>
+  </body>
+</html>
+
+<style lang="scss" is:global>
+  * {
+    margin: 0;
+    padding: 0;
+    font-family: 'BIZ UD PMincho';
+    font-style: normal;
+    font-weight: normal;
+  }
+
+  h1, h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-weight: bold;
+  }
+
+  p {
+    line-height: 1.5;
+  }
+
+  ul, ol, menu {
+    margin: 0 1rem;
+
+    li {
+      margin: 1rem 0;
+    }
+  }
+
+  main {
+    z-index: 0;
+    margin-top: 3rem;
+  }
+</style>
+
+<style lang="scss">
+  #default-layout {
+    display: grid;
+    grid-template-rows: 3rem 1fr;
+  }
+</style>

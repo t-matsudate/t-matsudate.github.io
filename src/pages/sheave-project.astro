@@ -1,0 +1,316 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro';
+import { getEntry } from 'astro:content';
+
+const serverOnThisRepository = `git clone https://github.com/t-matsudate/sheave
+
+cd ./sheave/sheave-server
+
+cargo run -- --rtmp 127.0.0.1:1935`;
+const serverOnDocker = `docker run --rm -it -e PROTOCOL=rtmp -e HOST=127.0.0.1 -e PORT=1935 tmatsudate/sheave-server:latest`;
+const clientOnThisRepository = `git clone https://github.com/t-matsudate/sheave
+
+cd ./sheave/sheave-client
+
+cargo run -- -i filename.flv -f flv rtmp://127.0.0.1:1935`;
+
+const { data: sheave } = await getEntry('repositories', 'sheave');
+const { data: headings } = await getEntry('headings', 'sheave');
+---
+<DefaultLayout
+  title="sheave"
+  headings={headings}
+  description="Rust製のRTMPプロトコル向けのツール群であるSheaveのリポジトリとドキュメントに関する情報の集約です。"
+>
+  <main>
+    <section id="link-preview">
+      <img src={sheave.logo.src} alt={sheave.logo.alt} id="sheave-logo" />
+      <div>
+        <h2>Sheave</h2>
+        <p>Rust による RTMP クライアント/サーバの実装</p>
+      </div>
+    </section>
+    <section id="link-usage">
+      <h2>使い方</h2>
+      <ul id="usage">
+        <li>
+          <h3>サーバ</h3>
+          <div>
+            <p>このリポジトリをそのまま使う場合</p>
+            <pre><code class="language-bash">{serverOnThisRepository}</code></pre>
+            <p>Dockerイメージとして使う場合</p>
+            <pre><code class="language-bash">{serverOnDocker}</code></pre>
+          </div>
+        </li>
+        <li>
+          <h3>クライアント</h3>
+          <div>
+            <p>このリポジトリをそのまま使う場合</p>
+            <pre><code class="language-bash">{clientOnThisRepository}</code></pre>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section id="link-documentations">
+      <h2>ドキュメント(英語)</h2>
+      <ul id="documentations">
+        <li>
+          <h3>コアライブラリ</h3>
+          <ul>
+            <li class="github"><a href="/sheave/sheave_core/">GitHub Pages</a></li>
+          </ul>
+        </li>
+        <li>
+          <h3>サーバ</h3>
+          <ul>
+            <li class="github"><a href="/sheave/sheave_server/">GitHub Pages</a></li>
+          </ul>
+        </li>
+        <li>
+          <h3>クライアント</h3>
+          <ul>
+            <li class="github"><a href="/sheave/sheave_client/">GitHub Pages</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+    <section id="link-goals">
+      <h2>目標</h2>
+      <div id="goals">
+        <p>RTMPツールの個人(あるいは小規模)利用に第三の選択肢を提供します。</p>
+        <ul>
+          <li>RTMPツールとして共通している機能を無料で利用できるようにします。</li>
+          <li>オープンソースとして公開し、独自に拡張できるようにします。</li>
+          <li>どのように小規模なユースケースでも容易に利用できるようにします。(例: VPS上)</li>
+        </ul>
+      </div>
+    </section>
+    <section id="link-features">
+      <h2>機能</h2>
+      <ul id="features">
+        <li>
+          <h3>実装済み</h3>
+          <ul id="implemented">
+            <li>RTMPハンドシェイクによる相互確認</li>
+            <li>通信に必要な設定情報の交換</li>
+            <li>音声/映像データの蓄積</li>
+          </ul>
+        </li>
+        <li>
+          <h3>実装中</h3>
+          <ul id="wip">
+            <li>ロガーによる詳細出力</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+    <section id="link-license">
+      <h2>ライセンス</h2>
+      <ul id="license">
+        <li>
+          <h3>MIT ライセンス</h3>
+          <p><a href="https://choosealicense.com/licenses/mit">https://choosealicense.com/licenses/mit</a></p>
+        </li>
+        <li>
+          <h3>条件</h3>
+          <ul id="conditions">
+            <li>ライセンス名と著作権者名の表記</li>
+          </ul>
+        </li>
+        <li>
+          <h3>許されていること</h3>
+          <ul id="permissions">
+            <li>商用利用</li>
+            <li>再配布</li>
+            <li>独自の変更</li>
+            <li>個人利用</li>
+          </ul>
+        </li>
+        <li>
+          <h3>制限事項</h3>
+          <ul id="limitations">
+            <li>作者は第三者による使用に関して責任を負いません。</li>
+            <li>同様に、いかなる保証も提供しません。</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </main>
+</DefaultLayout>
+
+<style lang="scss">
+  main > section {
+    min-height: var(--device-height);
+    padding: 2rem;
+
+    &:nth-child(even) {
+      @include theme-colors;
+    }
+
+    @include content-margin;
+  }
+
+  #link-preview {
+    @include horizontal-grid;
+
+    #sheave-logo {
+      width: calc(640px / var(--device-pixel-ratio));
+      height: calc(640px / var(--device-pixel-ratio));
+      margin: auto;
+    }
+
+    div {
+      @include content-margin;
+    }
+  }
+
+  #usage {
+    @include vertical-grid;
+    @include intermediate-border;
+
+    list-style: none;
+    margin: 0;
+
+    & > * {
+      @include horizontal-grid;
+
+      div {
+        @include content-margin;
+      }
+
+      pre {
+        text-wrap: wrap;
+
+        code {
+          font-family: 'Source Code Pro';
+        }
+      }
+    }
+  }
+
+  #documentations {
+    @include vertical-grid;
+    @include intermediate-border;
+
+    list-style: none;
+    margin: 0;
+
+    & > * {
+      @include horizontal-grid;
+
+      div {
+        @include content-margin;
+      }
+    }
+
+    .github {
+      @include list-with-fa;
+
+      &::marker {
+        @extend %fa-icon;
+        @extend .fa-brands;
+
+        content: fa-content($fa-var-github);
+      }
+    }
+  }
+
+  #goals {
+    @include horizontal-grid;
+  }
+
+  #features {
+    @include vertical-grid;
+    @include intermediate-border;
+
+    list-style: none;
+    margin: 0;
+
+    & > * {
+      @include horizontal-grid;
+    }
+
+    #implemented {
+      li {
+        @include list-with-fa;
+
+        &::marker {
+          @extend %fa-icon;
+          @extend .fa-solid;
+
+          content: fa-content($fa-var-square-check);
+        }
+      }
+    }
+
+    #wip {
+      li {
+        @include list-with-fa;
+
+        &::marker {
+          @extend %fa-icon;
+          @extend .fa-solid;
+
+          content: fa-content($fa-var-square);
+        }
+      }
+    }
+  }
+
+  #license {
+    @include vertical-grid;
+    @include intermediate-border;
+
+    list-style: none;
+    margin: 0;
+
+    & > * {
+      @include horizontal-grid;
+    }
+
+    #conditions {
+      li {
+        @include list-with-fa;
+
+        &::marker {
+          @extend %fa-icon;
+          @extend .fa-solid;
+
+          content: fa-content($fa-var-circle-exclamation);
+        }
+      }
+    }
+
+    #permissions {
+      li {
+        @include list-with-fa;
+
+        &::marker {
+          @extend %fa-icon;
+          @extend .fa-solid;
+
+          content: fa-content($fa-var-circle-check);
+        }
+      }
+    }
+
+    #limitations {
+      li {
+        @include list-with-fa;
+
+        &::marker {
+          @extend %fa-icon;
+          @extend .fa-solid;
+
+          content: fa-content($fa-var-circle-xmark);
+        }
+      }
+    }
+  }
+</style>
+
+<script>
+  import hljs from 'highlight.js';
+
+  hljs.highlightAll();
+</script>

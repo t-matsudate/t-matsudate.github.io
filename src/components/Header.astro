@@ -1,0 +1,74 @@
+---
+const { title } = Astro.props;
+---
+<header>
+  <button type="button" id="toggle-menu" class="closed"></button>
+  <h1>{ title ? title + ' - Func::main' : 'Func::main'}</h1>
+</header>
+
+<style lang="scss">
+  @mixin default-button-colors {
+  }
+
+  header {
+    @include theme-colors;
+
+    min-height: 3rem;
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 2rem;
+    align-content: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1;
+
+    #toggle-menu {
+      @include default-button-colors;
+
+      $button-color-brighter: hsl(122, 43%, 38%);
+      $button-color-darker: hsl(123, 46%, 33%);
+
+      width: 2rem;
+      height: 2rem;
+      margin: auto;
+      font-size: 1.5rem;
+      border-radius: 8px;
+
+      &::before {
+        @extend %fa-icon;
+        @extend .fa-solid;
+
+        content: fa-content($fa-var-bars);
+      }
+
+      &.closed {
+        border: 1px solid $button-color-darker;
+        background-color: $button-color-brighter;
+        color: $theme-anchor-color;
+      }
+
+      &.opened {
+        border: 1px solid $theme-background-color;
+        background-color: $button-color-darker;
+        color: $theme-anchor-color-active;
+      }
+    }
+  }
+</style>
+
+<script>
+  const toggleMenuButton = document.getElementById('toggle-menu');
+  toggleMenuButton?.addEventListener('click', () => {
+    const menu = document.getElementById('menu');
+    if (menu?.getAttribute('class') === 'closed') {
+      menu?.setAttribute('class', 'opened');
+      toggleMenuButton?.setAttribute('class', 'opened');
+    } else if (menu?.getAttribute('class') === 'opened') {
+      menu?.setAttribute('class', 'closed');
+      toggleMenuButton?.setAttribute('class', 'closed');
+    } else {
+      return;
+    }
+  });
+</script>

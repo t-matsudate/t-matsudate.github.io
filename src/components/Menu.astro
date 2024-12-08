@@ -1,0 +1,32 @@
+---
+const { headings } = Astro.props;
+---
+<nav id="menu" class="closed">
+  <menu>{headings.map(item => <li><a href={'#' + item.slug}>{item.text}</a></li>)}</menu>
+</nav>
+
+<style lang="scss">
+  #menu {
+    @include theme-colors;
+
+    position: fixed;
+    top: 3rem;
+    left: 0;
+    bottom: 0;
+    width: 20%;
+    padding: 1rem;
+    z-index: 2;
+
+    menu {
+      list-style: none;
+    }
+  }
+
+  .closed {
+    display: none;
+  }
+
+  .opened {
+    display: block;
+  }
+</style>

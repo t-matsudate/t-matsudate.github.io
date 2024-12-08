@@ -1,0 +1,43 @@
+---
+import { getEntry } from 'astro:content';
+
+const { data: indexHeadings } = await getEntry('headings', 'index');
+const { data: sheaveHeadings } = await getEntry('headings', 'sheave');
+---
+<footer>
+  <h2>サイトマップ</h2>
+  <div id="sitemap">
+    <section>
+      <h3>プロフィール</h3>
+      <ul>{indexHeadings.map(item => <li><a href={'/#' + item.slug}>{item.text}</a></li>)}</ul>
+    </section>
+    <section>
+      <h3>Sheave</h3>
+      <ul>{sheaveHeadings.map(item => <li><a href={'/sheave-project/#' + item.slug}>{item.text}</a></li>)}</ul>
+    </section>
+  </div>
+</footer>
+
+<style lang="scss">
+  footer {
+    @include theme-colors;
+    @include content-margin;
+
+    min-height: var(--device-height);
+    padding: 2rem;
+
+    #sitemap {
+      display: grid;
+      grid-template-columns: repeat(2, 24%);
+      gap: 1rem;
+
+      section {
+        @include content-margin;
+
+        ul {
+          list-style: none;
+        }
+      }
+    }
+  }
+</style>

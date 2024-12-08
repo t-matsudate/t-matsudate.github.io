@@ -1,0 +1,10 @@
+{
+  "name": "Sheave",
+  "logo": {
+    "src": "/images/logo_sheave.png",
+    "alt": "Sheave のプロジェクトロゴです。FerrisというRustのマスコットキャラクターと滑車のイメージを組み合わせています。"
+  },
+  "description": "Rust 製の RTMP サーバ/クライアントです。",
+  "repository": "https://github.com/t-matsudate/sheave",
+  "documentation": "/sheave-project"
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "depth": 2,
+    "slug": "link-preview",
+    "text": "Sheave"
+  },
+  {
+    "depth": 2,
+    "slug": "link-usage",
+    "text": "使い方"
+  },
+  {
+    "depth": 2,
+    "slug": "link-documentations",
+    "text": "ドキュメント(英語)"
+  },
+  {
+    "depth": 2,
+    "slug": "link-goals",
+    "text": "目標"
+  },
+  {
+    "depth": 2,
+    "slug": "link-features",
+    "text": "機能"
+  },
+  {
+    "depth": 2,
+    "slug": "link-license",
+    "text": "ライセンス"
+  }
+]
