@@ -25,8 +25,10 @@ const { data: headings } = await getEntry('headings', 'index');
 >
   <main>
     <section id="link-card">
-      <img src="/images/myface.png" alt="The Windows Bluescreen. :(" id="myface" />
-      <div>
+      <div class="images">
+        <img src="/images/myface.png" alt="The Windows Bluescreen. :(" id="myface" />
+      </div>
+      <div class="description">
         <h2><ruby>{card.name}<rp>(</rp><rt>{card.kana}</rt><rp>)</rp></ruby></h2>
         <ul id="belongs-to">{card.belongsTo.map(item => <li>{item}</li>)}</ul>
       </div>
@@ -35,11 +37,13 @@ const { data: headings } = await getEntry('headings', 'index');
       <h2>リポジトリ</h2>
       <ul id="repositories">{repositories.map(({ data: item }) => (
         <li>
-          <img src={item.logo.src} alt={item.logo.alt} class="logo" />
-          <div>
+          <div class="images">
+            <img src={item.logo.src} alt={item.logo.alt} class="logo" />
+          </div>
+          <div class="description">
             <h3>{item.name}</h3>
             <p>{item.description}</p>
-            <ul>
+            <ul class="links">
               <li class={findServiceName(item.repository)}><a href={item.repository}>リポジトリ</a></li>
               {item.documentation ? <li class="documentation"><a href={item.documentation}>ドキュメント</a></li> : null}
               {item.forkedFrom ? <li class="forked"><a href={item.forkedFrom}>フォーク元</a></li> : null}
@@ -56,16 +60,24 @@ const { data: headings } = await getEntry('headings', 'index');
           <p>{card.disorder.description}</p>
         </li>
         <li>
-          <h3>症状<br />あるいは不得意事項</h3>
-          <ul id="symptoms">{card.disorder.symptoms.map(item => (
-            <li>{item}</li>
-          ))}</ul>
+          <div>
+            <h3>症状<br />あるいは不得意事項</h3>
+          </div>
+          <div>
+            <ul id="symptoms">{card.disorder.symptoms.map(item => (
+              <li>{item}</li>
+            ))}</ul>
+          </div>
         </li>
         <li>
-          <h3>対処内容</h3>
-          <ul id="coping">{card.disorder.coping.map(item => (
-            <li>{item}</li>
-          ))}</ul>
+          <div>
+            <h3>対処内容</h3>
+          </div>
+          <div>
+            <ul id="coping">{card.disorder.coping.map(item => (
+              <li>{item}</li>
+            ))}</ul>
+          </div>
         </li>
       </ul>
     </section>
@@ -73,30 +85,18 @@ const { data: headings } = await getEntry('headings', 'index');
 </DefaultLayout>
 
 <style lang="scss">
-  main > section {
-    min-height: var(--device-height);
-    padding: 2rem;
+  @include section-layout;
 
-    &:nth-child(even) {
-      @include theme-colors;
-    }
-
-    @include content-margin;
+  .description {
+    @include line-margin;
   }
 
   #link-card {
-    @include horizontal-grid;
-
-    align-items: center;
+    @include grid-layout;
 
     #myface {
       width: calc(400px / var(--device-pixel-ratio));
       height: calc(400px / var(--device-pixel-ratio));
-      margin: auto;
-    }
-
-    div {
-      @include content-margin;
     }
 
     #belongs-to {
@@ -111,29 +111,25 @@ const { data: headings } = await getEntry('headings', 'index');
   }
 
   #repositories {
-    @include vertical-grid;
     @include intermediate-border;
 
     list-style: none;
     margin: 0;
 
     & > * {
-      @include horizontal-grid;
+      @include grid-layout;
+    }
 
-      div {
-        @include content-margin;
-      }
+    .links {
+      @include list-with-fa;
     }
 
     .logo {
       width: calc(640px / var(--device-pixel-ratio));
       height: calc(640px / var(--device-pixel-ratio));
-      margin: auto;
     }
 
     .github {
-      @include list-with-fa;
-
       &::marker {
         @extend %fa-icon;
         @extend .fa-brands;
@@ -143,8 +139,6 @@ const { data: headings } = await getEntry('headings', 'index');
     }
 
     .gitlab {
-      @include list-with-fa;
-
       &::marker {
         @extend %fa-icon;
         @extend .fa-brands;
@@ -154,8 +148,6 @@ const { data: headings } = await getEntry('headings', 'index');
     }
 
     .documentation {
-      @include list-with-fa;
-
       &::marker {
         @extend %fa-icon;
         @extend .fa-solid;
@@ -165,8 +157,6 @@ const { data: headings } = await getEntry('headings', 'index');
     }
 
     .forked {
-      @include list-with-fa;
-
       &::marker {
         @extend %fa-icon;
         @extend .fa-solid;
@@ -177,39 +167,34 @@ const { data: headings } = await getEntry('headings', 'index');
   }
 
   #disorder {
-    @include vertical-grid;
     @include intermediate-border;
 
     list-style: none;
     margin: 0;
 
     & > * {
-      @include horizontal-grid;
+      @include grid-layout;
     }
 
     #symptoms {
-      li {
-        @include list-with-fa;
+      @include list-with-fa;
 
-        &::marker {
-          @extend %fa-icon;
-          @extend .fa-solid;
+      li::marker {
+        @extend %fa-icon;
+        @extend .fa-solid;
 
-          content: fa-content($fa-var-notes-medical);
-        }
+        content: fa-content($fa-var-notes-medical);
       }
     }
 
     #coping {
-      li {
-        @include list-with-fa;
+      @include list-with-fa;
 
-        &::marker {
-          @extend %fa-icon;
-          @extend .fa-solid;
+      li::marker {
+        @extend %fa-icon;
+        @extend .fa-solid;
 
-          content: fa-content($fa-var-arrow-right);
-        }
+        content: fa-content($fa-var-arrow-right);
       }
     }
   }

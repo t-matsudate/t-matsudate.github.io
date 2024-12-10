@@ -24,8 +24,10 @@ const { data: headings } = await getEntry('headings', 'sheave');
 >
   <main>
     <section id="link-preview">
-      <img src={sheave.logo.src} alt={sheave.logo.alt} id="sheave-logo" />
-      <div>
+      <div class="images">
+        <img src={sheave.logo.src} alt={sheave.logo.alt} id="sheave-logo" />
+      </div>
+      <div class="description">
         <h2>Sheave</h2>
         <p>Rust による RTMP クライアント/サーバの実装</p>
       </div>
@@ -34,8 +36,10 @@ const { data: headings } = await getEntry('headings', 'sheave');
       <h2>使い方</h2>
       <ul id="usage">
         <li>
-          <h3>サーバ</h3>
           <div>
+            <h3>サーバ</h3>
+          </div>
+          <div class="description">
             <p>このリポジトリをそのまま使う場合</p>
             <pre><code class="language-bash">{serverOnThisRepository}</code></pre>
             <p>Dockerイメージとして使う場合</p>
@@ -43,8 +47,10 @@ const { data: headings } = await getEntry('headings', 'sheave');
           </div>
         </li>
         <li>
-          <h3>クライアント</h3>
           <div>
+            <h3>クライアント</h3>
+          </div>
+          <div class="description">
             <p>このリポジトリをそのまま使う場合</p>
             <pre><code class="language-bash">{clientOnThisRepository}</code></pre>
           </div>
@@ -55,52 +61,78 @@ const { data: headings } = await getEntry('headings', 'sheave');
       <h2>ドキュメント(英語)</h2>
       <ul id="documentations">
         <li>
-          <h3>コアライブラリ</h3>
-          <ul>
-            <li class="github"><a href="/sheave/sheave_core/">GitHub Pages</a></li>
-          </ul>
+          <div>
+            <h3>コアライブラリ</h3>
+          </div>
+          <div>
+            <ul class="links">
+              <li class="github"><a href="/sheave/sheave_core/">GitHub Pages</a></li>
+            </ul>
+          </div>
         </li>
         <li>
-          <h3>サーバ</h3>
-          <ul>
-            <li class="github"><a href="/sheave/sheave_server/">GitHub Pages</a></li>
-          </ul>
+          <div>
+            <h3>サーバ</h3>
+          </div>
+          <div>
+            <ul class="links">
+              <li class="github"><a href="/sheave/sheave_server/">GitHub Pages</a></li>
+            </ul>
+          </div>
         </li>
         <li>
-          <h3>クライアント</h3>
-          <ul>
-            <li class="github"><a href="/sheave/sheave_client/">GitHub Pages</a></li>
-          </ul>
+          <div>
+            <h3>クライアント</h3>
+          </div>
+          <div>
+            <ul class="links">
+              <li class="github"><a href="/sheave/sheave_client/">GitHub Pages</a></li>
+            </ul>
+          </div>
         </li>
       </ul>
     </section>
     <section id="link-goals">
       <h2>目標</h2>
-      <div id="goals">
-        <p>RTMPツールの個人(あるいは小規模)利用に第三の選択肢を提供します。</p>
-        <ul>
-          <li>RTMPツールとして共通している機能を無料で利用できるようにします。</li>
-          <li>オープンソースとして公開し、独自に拡張できるようにします。</li>
-          <li>どのように小規模なユースケースでも容易に利用できるようにします。(例: VPS上)</li>
-        </ul>
-      </div>
+      <ul id="goals">
+        <li>
+          <div>
+            <p>RTMPツールの個人(あるいは小規模)利用に第三の選択肢を提供します。</p>
+          </div>
+          <div>
+            <ul>
+              <li>RTMPツールとして共通している機能を無料で利用できるようにします。</li>
+              <li>オープンソースとして公開し、独自に拡張できるようにします。</li>
+              <li>どのように小規模なユースケースでも容易に利用できるようにします。(例: VPS上)</li>
+            </ul>
+          </div>
+        </li>
+      </ul>
     </section>
     <section id="link-features">
       <h2>機能</h2>
       <ul id="features">
         <li>
-          <h3>実装済み</h3>
-          <ul id="implemented">
-            <li>RTMPハンドシェイクによる相互確認</li>
-            <li>通信に必要な設定情報の交換</li>
-            <li>音声/映像データの蓄積</li>
-          </ul>
+          <div>
+            <h3>実装済み</h3>
+          </div>
+          <div>
+            <ul id="implemented">
+              <li>RTMPハンドシェイクによる相互確認</li>
+              <li>通信に必要な設定情報の交換</li>
+              <li>音声/映像データの蓄積</li>
+            </ul>
+          </div>
         </li>
         <li>
-          <h3>実装中</h3>
-          <ul id="wip">
-            <li>ロガーによる詳細出力</li>
-          </ul>
+          <div>
+            <h3>実装中</h3>
+          </div>
+          <div>
+            <ul id="wip">
+              <li>ロガーによる詳細出力</li>
+            </ul>
+          </div>
         </li>
       </ul>
     </section>
@@ -108,30 +140,46 @@ const { data: headings } = await getEntry('headings', 'sheave');
       <h2>ライセンス</h2>
       <ul id="license">
         <li>
-          <h3>MIT ライセンス</h3>
-          <p><a href="https://choosealicense.com/licenses/mit">https://choosealicense.com/licenses/mit</a></p>
+          <div>
+            <h3>MIT ライセンス</h3>
+          </div>
+          <div>
+            <p><a href="https://choosealicense.com/licenses/mit">https://choosealicense.com/licenses/mit</a></p>
+          </div>
         </li>
         <li>
-          <h3>条件</h3>
-          <ul id="conditions">
-            <li>ライセンス名と著作権者名の表記</li>
-          </ul>
+          <div>
+            <h3>条件</h3>
+          </div>
+          <div>
+            <ul id="conditions">
+              <li>ライセンス名と著作権者名の表記</li>
+            </ul>
+          </div>
         </li>
         <li>
-          <h3>許されていること</h3>
-          <ul id="permissions">
-            <li>商用利用</li>
-            <li>再配布</li>
-            <li>独自の変更</li>
-            <li>個人利用</li>
-          </ul>
+          <div>
+            <h3>許可事項</h3>
+          </div>
+          <div>
+            <ul id="permissions">
+              <li>商用利用</li>
+              <li>再配布</li>
+              <li>独自の変更</li>
+              <li>個人利用</li>
+            </ul>
+          </div>
         </li>
         <li>
-          <h3>制限事項</h3>
-          <ul id="limitations">
-            <li>作者は第三者による使用に関して責任を負いません。</li>
-            <li>同様に、いかなる保証も提供しません。</li>
-          </ul>
+          <div>
+            <h3>制限事項</h3>
+          </div>
+          <div>
+            <ul id="limitations">
+              <li>作者は第三者による使用に関して責任を負いません。</li>
+              <li>同様に、いかなる保証も提供しません。</li>
+            </ul>
+          </div>
         </li>
       </ul>
     </section>
@@ -139,44 +187,29 @@ const { data: headings } = await getEntry('headings', 'sheave');
 </DefaultLayout>
 
 <style lang="scss">
-  main > section {
-    min-height: var(--device-height);
-    padding: 2rem;
+  @include section-layout;
 
-    &:nth-child(even) {
-      @include theme-colors;
-    }
-
-    @include content-margin;
+  .description {
+    @include line-margin;
   }
 
   #link-preview {
-    @include horizontal-grid;
+    @include grid-layout;
 
     #sheave-logo {
       width: calc(640px / var(--device-pixel-ratio));
       height: calc(640px / var(--device-pixel-ratio));
-      margin: auto;
-    }
-
-    div {
-      @include content-margin;
     }
   }
 
   #usage {
-    @include vertical-grid;
     @include intermediate-border;
 
     list-style: none;
     margin: 0;
 
     & > * {
-      @include horizontal-grid;
-
-      div {
-        @include content-margin;
-      }
+      @include grid-layout;
 
       pre {
         text-wrap: wrap;
@@ -189,23 +222,20 @@ const { data: headings } = await getEntry('headings', 'sheave');
   }
 
   #documentations {
-    @include vertical-grid;
     @include intermediate-border;
 
     list-style: none;
     margin: 0;
 
     & > * {
-      @include horizontal-grid;
+      @include grid-layout;
+    }
 
-      div {
-        @include content-margin;
-      }
+    .links {
+      @include list-with-fa;
     }
 
     .github {
-      @include list-with-fa;
-
       &::marker {
         @extend %fa-icon;
         @extend .fa-brands;
@@ -216,94 +246,87 @@ const { data: headings } = await getEntry('headings', 'sheave');
   }
 
   #goals {
-    @include horizontal-grid;
+    list-style: none;
+    margin: 0;
+
+    & > * {
+      @include grid-layout;
+    }
   }
 
   #features {
-    @include vertical-grid;
     @include intermediate-border;
 
     list-style: none;
     margin: 0;
 
     & > * {
-      @include horizontal-grid;
+      @include grid-layout;
     }
 
     #implemented {
-      li {
-        @include list-with-fa;
+      @include list-with-fa;
 
-        &::marker {
-          @extend %fa-icon;
-          @extend .fa-solid;
+      li::marker {
+        @extend %fa-icon;
+        @extend .fa-solid;
 
-          content: fa-content($fa-var-square-check);
-        }
+        content: fa-content($fa-var-square-check);
       }
     }
 
     #wip {
-      li {
-        @include list-with-fa;
+      @include list-with-fa;
 
-        &::marker {
-          @extend %fa-icon;
-          @extend .fa-solid;
+      li::marker {
+        @extend %fa-icon;
+        @extend .fa-solid;
 
-          content: fa-content($fa-var-square);
-        }
+        content: fa-content($fa-var-square);
       }
     }
   }
 
   #license {
-    @include vertical-grid;
     @include intermediate-border;
 
     list-style: none;
     margin: 0;
 
     & > * {
-      @include horizontal-grid;
+      @include grid-layout;
     }
 
     #conditions {
-      li {
-        @include list-with-fa;
+      @include list-with-fa;
 
-        &::marker {
-          @extend %fa-icon;
-          @extend .fa-solid;
+      li::marker {
+        @extend %fa-icon;
+        @extend .fa-solid;
 
-          content: fa-content($fa-var-circle-exclamation);
-        }
+        content: fa-content($fa-var-circle-exclamation);
       }
     }
 
     #permissions {
-      li {
-        @include list-with-fa;
+      @include list-with-fa;
 
-        &::marker {
-          @extend %fa-icon;
-          @extend .fa-solid;
+      li::marker {
+        @extend %fa-icon;
+        @extend .fa-solid;
 
-          content: fa-content($fa-var-circle-check);
-        }
+        content: fa-content($fa-var-circle-check);
       }
     }
 
     #limitations {
-      li {
-        @include list-with-fa;
+      @include list-with-fa;
 
-        &::marker {
-          @extend %fa-icon;
-          @extend .fa-solid;
+      li::marker {
+        @extend %fa-icon;
+        @extend .fa-solid;
 
-          content: fa-content($fa-var-circle-xmark);
-        }
+        content: fa-content($fa-var-circle-xmark);
       }
     }
   }

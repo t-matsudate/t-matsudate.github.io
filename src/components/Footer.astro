@@ -21,18 +21,25 @@ const { data: sheaveHeadings } = await getEntry('headings', 'sheave');
 <style lang="scss">
   footer {
     @include theme-colors;
-    @include content-margin;
+    @include line-margin;
 
     min-height: var(--device-height);
     padding: 2rem;
 
     #sitemap {
-      display: grid;
-      grid-template-columns: repeat(2, 24%);
-      gap: 1rem;
+      @media (orientation: landscape) {
+        display: grid;
+        grid-template-columns: repeat(2, 24%);
+        gap: 1rem;
+      }
+
+      @media (orientation: portrait) {
+        display: grid;
+        gap: 1rem;
+      }
 
       section {
-        @include content-margin;
+        @include line-margin;
 
         ul {
           list-style: none;

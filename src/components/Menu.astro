@@ -13,9 +13,16 @@ const { headings } = Astro.props;
     top: 3rem;
     left: 0;
     bottom: 0;
-    width: 20%;
     padding: 1rem;
     z-index: 2;
+
+    @media (orientation: landscape) {
+      width: 25%;
+    }
+
+    @media (orientation: portrait) {
+      width: 50%;
+    }
 
     menu {
       list-style: none;
