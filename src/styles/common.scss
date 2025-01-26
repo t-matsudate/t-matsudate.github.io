@@ -21,7 +21,7 @@ $theme-anchor-color-active: hsl(42, 96%, 58%);
   }
 }
 
-@mixin line-margin {
+@mixin content-margin {
   & > :not(:last-child) {
     margin-bottom: 1em;
   }
@@ -36,7 +36,7 @@ $theme-anchor-color-active: hsl(42, 96%, 58%);
       @include theme-colors;
     }
 
-    @include line-margin;
+    @include content-margin;
   }
 }
 
@@ -115,6 +115,10 @@ $theme-anchor-color-active: hsl(42, 96%, 58%);
 
   @media (min-resolution: 3dppx) {
     --device-pixel-ratio: 3;
+  }
+
+  @media (min-resolution: 4dppx) {
+    --device-pixel-ratio: 4;
   }
 
   @media (orientation: landscape) {

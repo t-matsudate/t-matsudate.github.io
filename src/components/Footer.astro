@@ -21,7 +21,7 @@ const { data: sheaveHeadings } = await getEntry('headings', 'sheave');
 <style lang="scss">
   footer {
     @include theme-colors;
-    @include line-margin;
+    @include content-margin;
 
     min-height: var(--device-height);
     padding: 2rem;
@@ -39,7 +39,7 @@ const { data: sheaveHeadings } = await getEntry('headings', 'sheave');
       }
 
       section {
-        @include line-margin;
+        @include content-margin;
 
         ul {
           list-style: none;

@@ -120,7 +120,8 @@ const { data: headings } = await getEntry('headings', 'sheave');
             <ul id="implemented">
               <li>RTMPハンドシェイクによる相互確認</li>
               <li>通信に必要な設定情報の交換</li>
-              <li>音声/映像データの蓄積</li>
+              <li>音声/映像データの蓄積/公開</li>
+              <li>ロガーによる詳細出力</li>
             </ul>
           </div>
         </li>
@@ -130,7 +131,7 @@ const { data: headings } = await getEntry('headings', 'sheave');
           </div>
           <div>
             <ul id="wip">
-              <li>ロガーによる詳細出力</li>
+              <li>音声/映像データの購読</li>
             </ul>
           </div>
         </li>
@@ -190,7 +191,7 @@ const { data: headings } = await getEntry('headings', 'sheave');
   @include section-layout;
 
   .description {
-    @include line-margin;
+    @include content-margin;
   }
 
   #link-preview {
