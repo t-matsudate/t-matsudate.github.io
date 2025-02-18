@@ -17,5 +17,13 @@
       "事前な情報収集による即応力の向上。",
       "入念なリマインド、早期からの備え。"
     ]
+  },
+  "other": {
+    "donations": [
+      {
+        "name": "PayPal Me",
+        "url": "https://paypal.me/funchs"
+      }
+    ]
   }
 }

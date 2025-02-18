@@ -10,6 +10,8 @@ function findServiceName(url: string): 'github' | 'gitlab' | '' {
     return 'github';
   } else if (url.startsWith('https://gitlab.com')) {
     return 'gitlab';
+  } else if (url.startsWith('https://paypal.me')) {
+    return 'paypal';
   } else {
     return '';
   }
@@ -77,6 +79,21 @@ const { data: headings } = await getEntry('headings', 'index');
             <ul id="coping">{card.disorder.coping.map(item => (
               <li>{item}</li>
             ))}</ul>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section id="link-other">
+      <h2>その他</h2>
+      <ul id="donations">
+        <li>
+          <div>
+            <h3>寄付</h3>
+          </div>
+          <div>
+            <ul class="links">
+              {card.other.donations.map(donation => <li class={findServiceName(donation.url)}><a href={donation.url}>{donation.name}</a></li>)}
+            </ul>
           </div>
         </li>
       </ul>
@@ -195,6 +212,30 @@ const { data: headings } = await getEntry('headings', 'index');
         @extend .fa-solid;
 
         content: fa-content($fa-var-arrow-right);
+      }
+    }
+  }
+
+  #donations {
+    @include intermediate-border;
+
+    list-style: none;
+    margin: 0;
+
+    & > * {
+      @include grid-layout;
+    }
+
+    .links {
+      @include list-with-fa;
+    }
+
+    .paypal {
+      &::marker {
+        @extend %fa-icon;
+        @extend .fa-brands;
+
+        content: fa-content($fa-var-paypal);
       }
     }
   }
