@@ -1,10 +1,63 @@
 {
-  "name": "Sheave",
   "logo": {
     "src": "/images/logo_sheave.png",
-    "alt": "Sheave のプロジェクトロゴです。FerrisというRustのマスコットキャラクターと滑車のイメージを組み合わせています。"
+    "alt": "Sheaveのプロジェクトロゴです。FerrisというRustのマスコットキャラクターと滑車のイメージを組み合わせています。"
   },
-  "description": "Rust 製の RTMP サーバ/クライアントです。",
-  "repository": "https://github.com/t-matsudate/sheave",
-  "documentation": "/sheave-project"
+  "name": "Sheave",
+  "description": "Rust製のRTMPサーバおよびクライアントです。",
+  "links": {
+    "repository": "https://github.com/t-matsudate/sheave",
+    "documents": {
+      "base": "/sheave-project",
+      "core": "/sheave/sheave_core",
+      "server": "/sheave/sheave_server",
+      "client": "/sheave/sheave_client"
+    }
+  },
+  "usage": {
+    "server": {
+      "local": "git clone https://github.com/t-matsudate/sheave\ncd ./sheave/sheave-server\ncargo run -- --rtmp 127.0.0.1:1935",
+      "container": "docker run --rm -it -e HOST=127.0.0.1 -e PORT=1935 tmatsudate/sheave-server:latest"
+    },
+    "client": {
+      "local": "git clone https://github.com/t-matsudate/sheave\ncd ./sheave/sheave-client\ncargo run -- -f filename.flv -f flv rtmp://127.0.0.1"
+    }
+  },
+  "goals": {
+    "slogan": "RTMPツールの個人(あるいは小規模)利用に第三の選択肢を提供します。",
+    "descriptions": [
+      "RTMPツールとして共通している機能を無料で利用できるようにします。",
+      "オープンソースとして公開し、独自に拡張できるようにします。",
+      "どのように小規模なユースケースでも容易に利用できるようにします。(例: VPS上)"
+    ]
+  },
+  "features": {
+    "implemented": [
+      "RTMPハンドシェイクによる相互確認",
+      "通信に必要な設定情報の交換",
+      "音声/映像データの蓄積/公開",
+      "ロガーによる詳細出力"
+    ],
+    "wip": [
+      "音声/映像データの購読"
+    ]
+  },
+  "license": {
+    "name": "MIT ライセンス",
+    "descriptions": {
+      "conditions": [
+        "ライセンス名と著作権者名の表記"
+      ],
+      "permissions": [
+        "商用利用",
+        "再配布",
+        "独自の変更",
+        "個人利用"
+      ],
+      "limitations": [
+        "作者は第三者による使用に関して責任を負いません。",
+        "同様に、いかなる保証も提供しません。"
+      ]
+    }
+  }
 }
