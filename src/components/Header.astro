@@ -2,18 +2,18 @@
 const { title } = Astro.props;
 ---
 <header>
-  <button type="button" id="toggle-menu" class="closed"></button>
-  <h1>Func::main</h1>
+  <button type="button" id="toggle-menu" class="fa-solid fa-bars closed" aria-label="メニューボタン" aria-description="サイドメニューは閉じられています。"></button>
+  <h1><a href="/">Func::main</a></h1>
 </header>
 
 <style lang="scss">
   header {
     @include theme-colors;
 
-    min-height: 3rem;
+    min-height: calc($theme-h2-size + 1rem);
     display: grid;
-    grid-template-columns: 3rem 1fr;
-    gap: 2rem;
+    grid-template-columns: calc($theme-h2-size + 1rem) 1fr;
+    gap: $theme-h2-size;
     align-content: center;
     position: fixed;
     left: 0;
@@ -21,49 +21,58 @@ const { title } = Astro.props;
     z-index: 1;
 
     #toggle-menu {
-      $button-color-brighter: hsl(122, 43%, 38%);
-      $button-color-darker: hsl(123, 46%, 33%);
-
-      width: 2rem;
-      height: 2rem;
+      width: $theme-h2-size;
+      height: $theme-h2-size;
       margin: auto;
+      background-color: $theme-background-color;
       font-size: 1.5rem;
+      color: $theme-anchor-color;
+      border: 1px solid $theme-anchor-color;
       border-radius: 8px;
 
-      &::before {
-        @extend %fa-icon;
-        @extend .fa-solid;
-
-        content: fa-content($fa-var-bars);
-      }
-
       &.closed {
-        border: 1px solid $button-color-darker;
-        background-color: $button-color-brighter;
         color: $theme-anchor-color;
+        border-color: $theme-anchor-color;
       }
 
       &.opened {
-        border: 1px solid $theme-background-color;
-        background-color: $button-color-darker;
-        color: $theme-anchor-color-active;
+        color: $theme-anchor-color-visited;
+        border-color: $theme-anchor-color-visited;
+      }
+    }
+
+    h1 {
+      a {
+        color: $theme-foreground-color;
+        text-decoration: none;
+
+        &:active, &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
 </style>
 
 <script>
-  const toggleMenuButton = document.getElementById('toggle-menu');
-  toggleMenuButton?.addEventListener('click', () => {
-    const menu = document.getElementById('menu');
-    if (menu?.getAttribute('class') === 'closed') {
-      menu?.setAttribute('class', 'opened');
-      toggleMenuButton?.setAttribute('class', 'opened');
-    } else if (menu?.getAttribute('class') === 'opened') {
-      menu?.setAttribute('class', 'closed');
-      toggleMenuButton?.setAttribute('class', 'closed');
-    } else {
-      return;
+  const toggleMenuButton = document.getElementById('toggle-menu') as HTMLButtonElement;
+
+  toggleMenuButton.addEventListener('click', () => {
+    const menu = document.getElementById('menu') as HTMLElement;
+
+    switch (menu.getAttribute('class')) {
+      case 'closed':
+        menu.setAttribute('class', 'opened');
+        toggleMenuButton.setAttribute('class', 'fa-solid fa-bars opened');
+        toggleMenuButton.ariaDescription = 'サイドメニューは開かれています。';
+        break;
+      case 'opened':
+        menu.setAttribute('class', 'closed');
+        toggleMenuButton.setAttribute('class', 'fa-solid fa-bars closed');
+        toggleMenuButton.ariaDescription = 'サイドメニューは閉じられています。';
+        break;
+      default:
+        break;
     }
   });
 </script>
