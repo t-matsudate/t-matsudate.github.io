@@ -1,242 +1,141 @@
 ---
 import DefaultLayout from '@layouts/DefaultLayout.astro';
+import IconItem from '@components/IconItem.astro';
 import {
   getCollection,
   getEntry,
 } from 'astro:content';
 
-function findServiceName(url: string): 'github' | 'gitlab' | '' {
+interface FontAwesomeClass {
+  category: 'solid' | 'brands' | null;
+  icon: 'string' | null;
+}
+
+function findServiceName(url: string): 'github' | 'gitlab' | null {
   if (url.startsWith('https://github.com')) {
     return 'github';
   } else if (url.startsWith('https://gitlab.com')) {
     return 'gitlab';
-  } else if (url.startsWith('https://paypal.me')) {
-    return 'paypal';
   } else {
-    return '';
+    return null;
   }
 }
 
-const { data: card } = await getEntry('cards', '2024');
-const repositories = await getCollection('repositories');
+function makeFontAwesomeClassFromServiceName(service: string | null) : FontAwesomeClass {
+  switch (service) {
+    case 'github':
+      return { category: 'brands', icon: 'github' };
+    case 'gitlab':
+      return { category: 'brands', icon: 'gitlab' };
+    default:
+      return { category: null, icon: null };
+  }
+}
+
 const { data: headings } = await getEntry('headings', 'index');
+const { data: card } = await getEntry('cards', '2025');
+const repositories = await getCollection('repositories');
 ---
 <DefaultLayout
   headings={headings}
-  description="Func(@func_hs)のリポジトリ情報の集約および活動の記録です。"
+  description=""
 >
-  <main>
+  <main id="index">
     <section id="link-card">
-      <div class="images">
-        <img src="/images/myface.png" alt="The Windows Bluescreen. :(" id="myface" />
-      </div>
-      <div class="description">
-        <h2><ruby>{card.name}<rp>(</rp><rt>{card.kana}</rt><rp>)</rp></ruby></h2>
-        <ul id="belongs-to">{card.belongsTo.map(item => <li>{item}</li>)}</ul>
-      </div>
+      <img src="/images/myface.png" alt="func_hsのSNSアイコンです。" id="my-face" />
+      <h2>
+        <span>func</span>
+        <span>::</span>
+        <span>自由</span>
+        <span>-&gt;</span>
+        <span>ビジネス</span>
+      </h2>
+    </section>
+    <section id="link-goals">
+      <h2>目標</h2>
+      <ol id="goals">{card.goals.map(goal =>
+        <li>
+          <h3>{goal.slogan}</h3>
+          <p>{goal.description}</p>
+          <ul class="todos">{goal.todos.map(todo => <IconItem category="solid" icon={'square' + (todo.completed ? '-check' : '')}>{todo.text}</IconItem>)}</ul>
+        </li>)}
+      </ol>
     </section>
     <section id="link-repositories">
       <h2>リポジトリ</h2>
-      <ul id="repositories">{repositories.map(({ data: item }) => (
-        <li>
-          <div class="images">
-            <img src={item.logo.src} alt={item.logo.alt} class="logo" />
-          </div>
-          <div class="description">
-            <h3>{item.name}</h3>
-            <p>{item.description}</p>
+      <ul id="repositories">{repositories.map(({ id, data: repository }) => (
+        <li id={id}>
+          <img src={repository.logo.src} alt={repository.logo.alt} />
+          <div>
+            <h3>{repository.name}</h3>
+            <p>{repository.description}</p>
             <ul class="links">
-              <li class={findServiceName(item.repository)}><a href={item.repository}>リポジトリ</a></li>
-              {item.documentation ? <li class="documentation"><a href={item.documentation}>ドキュメント</a></li> : null}
-              {item.forkedFrom ? <li class="forked"><a href={item.forkedFrom}>フォーク元</a></li> : null}
+              <IconItem {...makeFontAwesomeClassFromServiceName(findServiceName(repository.links.repository))}><a href={repository.links.repository}>リポジトリ</a></IconItem>
+              {repository.links.documents?.base ? <IconItem category="solid" icon="book"><a href={repository.links.documents.base}>ドキュメント</a></IconItem> : null}
             </ul>
           </div>
         </li>
       ))}</ul>
     </section>
-    <section id="link-disorder">
-      <h2>私の障碍について</h2>
-      <ul id="disorder">
-        <li>
-          <h3>{card.disorder.name}</h3>
-          <p>{card.disorder.description}</p>
-        </li>
-        <li>
-          <div>
-            <h3>症状<br />あるいは不得意事項</h3>
-          </div>
-          <div>
-            <ul id="symptoms">{card.disorder.symptoms.map(item => (
-              <li>{item}</li>
-            ))}</ul>
-          </div>
-        </li>
-        <li>
-          <div>
-            <h3>対処内容</h3>
-          </div>
-          <div>
-            <ul id="coping">{card.disorder.coping.map(item => (
-              <li>{item}</li>
-            ))}</ul>
-          </div>
-        </li>
-      </ul>
-    </section>
-    <section id="link-other">
-      <h2>その他</h2>
+    <section id="link-donation">
+      <h2>寄付</h2>
       <ul id="donations">
-        <li>
-          <div>
-            <h3>寄付</h3>
-          </div>
-          <div>
-            <ul class="links">
-              {card.other.donations.map(donation => <li class={findServiceName(donation.url)}><a href={donation.url}>{donation.name}</a></li>)}
-            </ul>
-          </div>
-        </li>
+        <IconItem category="brands" icon="paypal"><a href="https://paypal.me/funchs">PayPal Me</a></IconItem>
       </ul>
     </section>
   </main>
 </DefaultLayout>
 
 <style lang="scss">
-  @include section-layout;
-
-  .description {
-    @include content-margin;
-  }
-
-  #link-card {
-    @include grid-layout;
-
-    #myface {
-      width: calc(400px / var(--device-pixel-ratio));
-      height: calc(400px / var(--device-pixel-ratio));
+  #index {
+    section {
+      @include section-layout;
     }
 
-    #belongs-to {
-      list-style: none;
-      margin: 0;
+    #link-card {
+      display: grid;
+      grid-template-rows: 50% 1fr;
+      justify-content: center;
+      align-content: center;
+      gap: 1rem;
 
-      li:last-child::after {
-        margin-left: 1rem;
-        content: '所属';
+      #my-face {
+        @include image-sizing(400px, 400px);
+
+        justify-self: center;
+        align-self: center;
+      }
+
+      h2 {
+        display: grid;
+        grid-template-columns: repeat(5, auto);
+        justify-content: center;
+        gap: 1rem;
       }
     }
-  }
 
-  #repositories {
-    @include intermediate-border;
+    #goals {
+      @include list-with-headings;
 
-    list-style: none;
-    margin: 0;
-
-    & > * {
-      @include grid-layout;
+      margin: 0 $theme-h2-size;
     }
 
-    .links {
+    #repositories {
+      & > li {
+        @include grid-with-image;
+
+        &:not(:last-child) {
+          margin-bottom: $theme-h3-size;
+        }
+      }
+
+      img {
+        @include image-sizing(640px, 640px);
+      }
+    }
+
+    :is(#goals .todos, #repositories .links, #donations) {
       @include list-with-fa;
-    }
-
-    .logo {
-      width: calc(640px / var(--device-pixel-ratio));
-      height: calc(640px / var(--device-pixel-ratio));
-    }
-
-    .github {
-      &::marker {
-        @extend %fa-icon;
-        @extend .fa-brands;
-
-        content: fa-content($fa-var-github);
-      }
-    }
-
-    .gitlab {
-      &::marker {
-        @extend %fa-icon;
-        @extend .fa-brands;
-
-        content: fa-content($fa-var-gitlab);
-      }
-    }
-
-    .documentation {
-      &::marker {
-        @extend %fa-icon;
-        @extend .fa-solid;
-
-        content: fa-content($fa-var-book);
-      }
-    }
-
-    .forked {
-      &::marker {
-        @extend %fa-icon;
-        @extend .fa-solid;
-
-        content: fa-content($fa-var-code-fork);
-      }
-    }
-  }
-
-  #disorder {
-    @include intermediate-border;
-
-    list-style: none;
-    margin: 0;
-
-    & > * {
-      @include grid-layout;
-    }
-
-    #symptoms {
-      @include list-with-fa;
-
-      li::marker {
-        @extend %fa-icon;
-        @extend .fa-solid;
-
-        content: fa-content($fa-var-notes-medical);
-      }
-    }
-
-    #coping {
-      @include list-with-fa;
-
-      li::marker {
-        @extend %fa-icon;
-        @extend .fa-solid;
-
-        content: fa-content($fa-var-arrow-right);
-      }
-    }
-  }
-
-  #donations {
-    @include intermediate-border;
-
-    list-style: none;
-    margin: 0;
-
-    & > * {
-      @include grid-layout;
-    }
-
-    .links {
-      @include list-with-fa;
-    }
-
-    .paypal {
-      &::marker {
-        @extend %fa-icon;
-        @extend .fa-brands;
-
-        content: fa-content($fa-var-paypal);
-      }
     }
   }
 </style>

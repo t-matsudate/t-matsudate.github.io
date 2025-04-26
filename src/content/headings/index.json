@@ -2,7 +2,12 @@
   {
     "depth": 2,
     "slug": "link-card",
-    "text": "基本情報"
+    "text": "名刺"
+  },
+  {
+    "depth": 2,
+    "slug": "link-goals",
+    "text": "目標"
   },
   {
     "depth": 2,
@@ -11,12 +16,7 @@
   },
   {
     "depth": 2,
-    "slug": "link-disorder",
-    "text": "私の障碍について"
-  },
-  {
-    "depth": 2,
-    "slug": "link-other",
-    "text": "その他"
+    "slug": "link-donation",
+    "text": "寄付"
   }
 ]
