@@ -14,10 +14,6 @@ import katex from 'rehype-katex';
 import slug from 'rehype-slug';
 import path from 'node:path';
 
-const fontAwesomePath = path.resolve('node_modules', '@fortawesome', 'fontawesome-free', 'scss');
-const githubMarkdownPath = path.resolve('node_modules', 'github-markdown-css');
-const highlightPath = path.resolve('node_modules', 'highlight.js', 'scss');
-const katexPath = path.resolve('node_modules', 'katex', 'dist');
 const stylesPath = path.resolve('src', 'styles');
 const layoutsPath = path.resolve('src', 'layouts');
 const componentsPath = path.resolve('src', 'components');
@@ -58,13 +54,13 @@ export default defineConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@import "${fontAwesomePath}/fontawesome";
-          @import "${fontAwesomePath}/solid";
-          @import "${fontAwesomePath}/brands";
-          @import "${githubMarkdownPath}/github-markdown.css";
-          @import "${highlightPath}/github-dark";
-          @import "${katexPath}/katex.min";
-          @import "${stylesPath}/common";`
+          additionalData: `@use "${stylesPath}/common" as *;
+          @import url("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/fontawesome.min.css");
+          @import url("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/solid.min.css");
+          @import url("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/brands.min.css");
+          @import url("https://cdn.jsdelivr.net/npm/github-markdown-css@5.8.1/github-markdown.min.css");
+          @import url("https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css");
+          @import url("https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/styles/github-dark.min.css");`
         }
       }
     }
