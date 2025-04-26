@@ -1,19 +1,19 @@
----
-import { getEntry } from 'astro:content';
-
-const { data: indexHeadings } = await getEntry('headings', 'index');
-const { data: sheaveHeadings } = await getEntry('headings', 'sheave');
----
 <footer>
   <h2>サイトマップ</h2>
   <div id="sitemap">
     <section>
-      <h3>プロフィール</h3>
-      <ul>{indexHeadings.map(item => <li><a href={'/#' + item.slug}>{item.text}</a></li>)}</ul>
+      <h3>ページ構成</h3>
+      <ul id="sitemap-pages">
+        <li><a href="/">インデックス</a></li>
+        <li><a href="/sheave-project">Sheave</a></li>
+      </ul>
     </section>
     <section>
-      <h3>Sheave</h3>
-      <ul>{sheaveHeadings.map(item => <li><a href={'/sheave-project/#' + item.slug}>{item.text}</a></li>)}</ul>
+      <h3>リポジトリ</h3>
+      <ul id="sitemap-repositories">
+        <li class="github"><a href="https://github.com/t-matsudate/sheave">Sheave</a></li>
+        <li class="gitlab"><a href="https://gitlab.com/t-matsudate/vox-verse">VOX Verse</a></li>
+      </ul>
     </section>
   </div>
 </footer>
@@ -24,9 +24,22 @@ const { data: sheaveHeadings } = await getEntry('headings', 'sheave');
     @include content-margin;
 
     min-height: var(--device-height);
-    padding: 2rem;
+    padding: $theme-h2-size;
 
     #sitemap {
+      section {
+        @include content-margin;
+
+        ul {
+          list-style: none;
+          margin: 0;
+
+          li {
+            margin: 1rem 0;
+          }
+        }
+      }
+
       @media (orientation: landscape) {
         display: grid;
         grid-template-columns: repeat(2, 24%);
@@ -36,14 +49,6 @@ const { data: sheaveHeadings } = await getEntry('headings', 'sheave');
       @media (orientation: portrait) {
         display: grid;
         gap: 1rem;
-      }
-
-      section {
-        @include content-margin;
-
-        ul {
-          list-style: none;
-        }
       }
     }
   }
