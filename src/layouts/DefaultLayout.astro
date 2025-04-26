@@ -39,12 +39,16 @@ const currentPath = Astro.routePattern;
   * {
     margin: 0;
     padding: 0;
-    font-family: 'BIZ UD PMincho';
     font-style: normal;
     font-weight: normal;
   }
 
-  h1, h2 {
+  main {
+    z-index: 0;
+    margin-top: 3rem;
+  }
+
+  :is(h1, h2) {
     font-size: 2rem;
   }
 
@@ -52,25 +56,8 @@ const currentPath = Astro.routePattern;
     font-size: 1.5rem;
   }
 
-  h4 {
-    font-weight: bold;
-  }
-
   p {
     line-height: 1.5;
-  }
-
-  ul, ol, menu {
-    margin: 0 1rem;
-
-    li {
-      margin: 1rem 0;
-    }
-  }
-
-  main {
-    z-index: 0;
-    margin-top: 3rem;
   }
 </style>
 
