@@ -1,0 +1,17 @@
+---
+const {
+  category,
+  icon
+} = Astro.props;
+---
+<li><i class={'fa-' + category + ' fa-' + icon}></i><slot /></li>
+
+<style lang="scss">
+  li {
+    margin: 1rem 0;
+
+    i {
+      margin-right: 1rem;
+    }
+  }
+</style>

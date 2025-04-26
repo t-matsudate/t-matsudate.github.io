@@ -1,0 +1,5 @@
+---
+const { completed } = Astro.props;
+---
+
+<li class={'fa-solid ' + (completed ? 'fa-square-check' : 'fa-square')}><slot /></li>

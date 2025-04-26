@@ -1,0 +1,20 @@
+---
+import path from 'node:path';
+
+const { language } = Astro.props;
+---
+<pre><code class={"language-" + language}><slot /></code></pre>
+
+<style lang="scss">
+  pre:has(+ *) {
+    margin-bottom: 1em;
+  }
+
+  pre {
+    text-wrap: wrap;
+
+    code {
+      font-family: 'Source Code Pro';
+    }
+  }
+</style>
