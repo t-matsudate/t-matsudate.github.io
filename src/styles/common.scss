@@ -3,6 +3,8 @@ $theme-foreground-color: hsl(0, 100%, 100%);
 $theme-anchor-color: hsl(53, 100%, 61%);
 $theme-anchor-color-visited: hsl(28, 91%, 52%);
 $theme-anchor-color-active: hsl(42, 96%, 58%);
+$theme-h2-size: 2rem;
+$theme-h3-size: 1.5rem;
 
 @mixin theme-colors {
   background-color: $theme-background-color;
@@ -28,82 +30,108 @@ $theme-anchor-color-active: hsl(42, 96%, 58%);
 }
 
 @mixin section-layout {
-  main > section {
-    min-height: var(--device-height);
-    padding: 2rem;
+  @include content-margin;
 
-    &:nth-child(even) {
-      @include theme-colors;
-    }
+  min-height: var(--device-height);
+  padding: $theme-h2-size;
 
-    @include content-margin;
+  &:nth-child(even) {
+    @include theme-colors;
   }
 }
 
-@mixin grid-layout {
+@mixin grid-with-image {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  gap: 1rem;
+
   @media (orientation: landscape) {
     display: grid;
     grid-template-columns: 50% 1fr;
     gap: 1rem;
-
-    & > .images {
-      display: grid;
-      justify-content: center;
-      align-content: center;
-    }
-
-    & > :not(.images) {
-      display: grid;
-      align-content: center;
-      align-items: center;
-    }
-
-    & > * {
-      min-height: calc(var(--device-height) / 2);
-    }
   }
 
-  @media (orientation: portrait) {
-    display: grid;
-    gap: 1rem;
+  & > * {
+    min-height: calc(var(--device-height) / 2);
+  }
 
-    & > .images {
-      display: grid;
-      justify-content: center;
-      align-content: center;
-    }
+  img {
+    justify-self: center;
+    align-self: center;
+  }
+
+  :not(img) {
+    @include content-margin;
   }
 }
 
-@mixin intermediate-border {
-  & > * {
-    padding: 1rem 0;
+@mixin image-sizing($width, $height) {
+  max-width: calc($width / var(--device-pixel-ratio));
+  max-height: calc($height / var(--device-pixel-ratio));
+}
+
+@mixin list-with-default {
+  margin: 0 1rem;
+
+  li {
+    margin: 1rem 0;
+  }
+}
+
+@mixin list-with-headings {
+  & > li {
+    @include content-margin;
   }
 
-  & > :first-child {
-    padding-top: 0;
+  &:has(> li > :first-child:is(h2)) {
+    & > li::marker {
+      font-size: $theme-h2-size;
+    }
+
+    & > :not(:last-child) {
+      margin-bottom: $theme-h2-size;
+    }
   }
 
-  & > :last-child {
-    padding-bottom: 0;
-  }
+  &:has(> li > :first-child:is(h3)) {
+    & > li::marker {
+      font-size: $theme-h3-size;
+    }
 
-  & > :not(:last-child) {
-    border-bottom: 1px solid;
+    & > :not(:last-child) {
+      margin-bottom: $theme-h3-size;
+    }
   }
 }
 
 @mixin list-with-fa {
-  li {
-    padding-left: 1rem;
-  }
+  list-style: none;
+  margin: 0;
+}
+
+@font-face {
+  font-family: 'BIZ UD PMincho';
+  src: url('/fonts/BIZUDPMincho-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  src: url('/fonts/SourceCodePro-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Noto Sans Math';
+  src: url('/fonts/NotoSansMath-Regular.ttf') format('truetype');
 }
 
 :root {
-  /* Assumes the Full HD is common size for all devices. */
+  /* Full HDをすべての端末のデフォルトと仮定する。 */
   --device-width: 1920px;
   --device-height: 1080px;
   --device-pixel-ratio: 1;
+
+  font-family: 'BIZ UD PMincho';
 
   @media (min-resolution: 2dppx) {
     --device-pixel-ratio: 2;
@@ -204,19 +232,4 @@ $theme-anchor-color-active: hsl(42, 96%, 58%);
       --device-widht: 2160px;
     }
   }
-}
-
-@font-face {
-  font-family: 'BIZ UD PMincho';
-  src: url('/fonts/BIZUDPMincho-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Source Code Pro';
-  src: url('/fonts/SourceCodePro-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Noto Sans Math';
-  src: url('/fonts/NotoSansMath-Regular.ttf') format('truetype');
 }
