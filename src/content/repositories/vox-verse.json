@@ -1,9 +1,11 @@
 {
-  "name": "VOX Verse",
   "logo": {
     "src": null,
     "alt": null
   },
+  "name": "VOX Verse",
   "description": "合成音声作成ツール「VOICEVOX」の特徴を活かし、「有志によるコンテンツ投稿」という観点から VOICEVOX の普及に貢献するための、音声データ特化の消費者生成型メディア(CGM)です。(開発中)",
-  "repository": "https://gitlab.com/t-matsudate/vox-verse"
+  "links": {
+    "repository": "https://gitlab.com/t-matsudate/vox-verse"
+  }
 }
