@@ -85,7 +85,6 @@ const repositories = await getCollection('repositories');
     </section>
   </main>
 </DefaultLayout>
-
 <style lang="scss">
   #index {
     section {
@@ -99,11 +98,14 @@ const repositories = await getCollection('repositories');
       align-content: center;
       gap: 1rem;
 
+      & > * {
+        align-self: center;
+      }
+
       #my-face {
         @include image-sizing(400px, 400px);
 
         justify-self: center;
-        align-self: center;
       }
 
       h2 {
@@ -134,8 +136,10 @@ const repositories = await getCollection('repositories');
       }
     }
 
-    :is(#goals .todos, #repositories .links, #donations) {
-      @include list-with-fa;
-    }
+  }
+</style>
+<style lang="scss" is:global>
+  :is(#goals .todos, #repositories .links, #donations) {
+    @include list-with-fa;
   }
 </style>

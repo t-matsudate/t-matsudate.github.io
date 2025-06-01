@@ -1,8 +1,8 @@
 $theme-background-color: hsl(124, 55%, 23%);
 $theme-foreground-color: hsl(0, 100%, 100%);
 $theme-anchor-color: hsl(53, 100%, 61%);
-$theme-anchor-color-visited: hsl(28, 91%, 52%);
-$theme-anchor-color-active: hsl(42, 96%, 58%);
+$theme-anchor-color-visited: hsl(42, 96%, 58%);
+$theme-anchor-color-active: hsl(48, 98%, 60%);
 $theme-h2-size: 2rem;
 $theme-h3-size: 1.5rem;
 
@@ -30,10 +30,10 @@ $theme-h3-size: 1.5rem;
 }
 
 @mixin section-layout {
-  @include content-margin;
-
   min-height: var(--device-height);
   padding: $theme-h2-size;
+
+  @include content-margin;
 
   &:nth-child(even) {
     @include theme-colors;
@@ -108,6 +108,14 @@ $theme-h3-size: 1.5rem;
 @mixin list-with-fa {
   list-style: none;
   margin: 0;
+
+  & > li {
+    margin: 1rem 0;
+
+    & > [class|=fa] {
+      margin-right: 1rem;
+    }
+  }
 }
 
 @font-face {

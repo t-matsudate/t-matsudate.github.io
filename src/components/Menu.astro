@@ -2,7 +2,7 @@
 const { headings } = Astro.props;
 ---
 <nav id="menu" class="closed">
-  <menu>{headings.map(item => <li><a href={'#' + item.slug}>{item.text}</a></li>)}</menu>
+  <menu>{headings.map(item => <li class={'depth-' + item.depth}><a href={'#' + item.slug}>{item.text}</a></li>)}</menu>
 </nav>
 
 <style lang="scss">
@@ -15,6 +15,7 @@ const { headings } = Astro.props;
     bottom: 0;
     padding: 1rem;
     z-index: 2;
+    overflow-y: auto;
 
     @media (orientation: landscape) {
       width: 25%;
@@ -31,6 +32,26 @@ const { headings } = Astro.props;
       li {
         margin: 1rem 0;
       }
+    }
+
+    .depth-2 {
+      padding-left: 1rem;
+    }
+
+    .depth-3 {
+      padding-left: 2rem;
+    }
+
+    .depth-4 {
+      padding-left: 3rem;
+    }
+
+    .depth-5 {
+      padding-left: 4rem;
+    }
+
+    .depth-6 {
+      padding-left: 5rem;
     }
   }
 

@@ -1,0 +1,44 @@
+---
+import {
+  getCollection,
+  render
+} from 'astro:content';
+import MarkdownLayout from '@layouts/MarkdownLayout.astro';
+
+export async function getStaticPaths() {
+  const rtmpSpecifications = await getCollection('rtmpSpecifications');
+
+  return rtmpSpecifications.map(rtmpSpecification => ({
+    params: { id: rtmpSpecification.id },
+    props: { rtmpSpecification }
+  }));
+}
+
+const { rtmpSpecification } = Astro.props;
+const {
+  Content,
+  headings,
+  remarkPluginFrontmatter: frontmatter
+} = await render(rtmpSpecification);
+---
+<MarkdownLayout frontmatter={frontmatter} headings={headings}>
+  <Content />
+</MarkdownLayout>
+
+<script>
+  const images = document.getElementsByTagName('img');
+
+  for (let i = 0; i < images.length; i++) {
+    images[i].setAttribute('style', `max-width: ${window.innerWidth / window.devicePixelRatio}px;`);
+  }
+
+  const tables = document.getElementsByTagName('table');
+
+  for (let i = 0; i < tables.length; i++) {
+    const heads = tables[i].getElementsByTagName('th');
+
+    for (let j = 0; j < heads.length; j++) {
+      heads[j].setAttribute('style', `width: ${100 / heads.length}%`);
+    }
+  }
+</script>

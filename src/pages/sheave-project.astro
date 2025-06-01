@@ -116,11 +116,14 @@ const { data: headings } = await getEntry('headings', 'sheave');
       align-content: center;
       gap: 1rem;
 
+      & > * {
+        align-self: center;
+      }
+
       #logo-sheave {
         @include image-sizing(640px, 640px);
 
         justify-self: center;
-        align-self: center;
       }
 
       div {
@@ -133,17 +136,30 @@ const { data: headings } = await getEntry('headings', 'sheave');
     }
 
     :is(#usage, #documents, #features, #license) {
-      @include list-with-headings;
-
       list-style: none;
+
+      @include list-with-headings;
     }
 
-    :is(#link-documents .links, #implemented, #wip, #conditions, #permissions, #limitations) {
-      @include list-with-fa;
+  }
+</style>
+<style lang="scss" is:global>
+  :is(#link-documents .links, #implemented, #wip, #conditions, #permissions, #limitations) {
+    @include list-with-fa;
+  }
+
+  pre:has(+ *) {
+    margin-bottom: 1em;
+  }
+
+  pre {
+    text-wrap: wrap;
+
+    code {
+      font-family: 'Source Code Pro';
     }
   }
 </style>
-
 <script>
   import hljs from 'highlight.js';
 

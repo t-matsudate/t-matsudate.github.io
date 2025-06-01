@@ -32,8 +32,8 @@ export default defineConfig({
       math
     ],
     rehypePlugins: [
-      autolinkHeadings,
       slug,
+      autolinkHeadings,
       highlight,
       katex
     ]
@@ -64,5 +64,8 @@ export default defineConfig({
         }
       }
     }
+  },
+  redirects: {
+    '/articles/rtmp-specification/': '/articles/rtmp-specification/1'
   }
 });

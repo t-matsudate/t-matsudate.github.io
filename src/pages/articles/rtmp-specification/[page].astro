@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import DefaultLayout from '@layouts/DefaultLayout.astro';
+import Contents from '@components/Contents.astro';
+
+export async function getStaticPaths({ paginate }) {
+  const rtmpSpecifications = await getCollection('rtmpSpecifications');
+  rtmpSpecifications.sort((articleA, articleB) => parseInt(articleA.id.split('-')[0]) - parseInt(articleB.id.split('-')[0]));
+
+  return paginate(rtmpSpecifications);
+}
+
+const { page } = Astro.props;
+const headings = page.data.map(rtmpSpecification => ({
+  depth: 3,
+  slug: rtmpSpecification.id,
+  text: rtmpSpecification.data.title
+}));
+---
+
+<DefaultLayout title="RTMP仕様書 in 令和" headings={headings}>
+  <main id="rtmp-specification">
+    <section>
+      <h2>記事一覧</h2>
+      <ul id="rtmp-specifications">
+      {page.data.map(rtmpSpecification => <Contents id={rtmpSpecification.id} data={rtmpSpecification.data} />)}
+      </ul>
+      <div id="page-links">
+        <a {page.url.first ? 'href=' + page.url.first : null}>最初のページ</a>
+        <a {page.url.prev ? 'href=' + page.url.prev: null}>前のページ</a>
+        <span>{page.currentPage} / {page.lastPage}</span>
+        <a {page.url.next ? 'href=' + page.url.next : null}>次のページ</a>
+        <a {page.url.last ? 'href=' + page.url.last : null}>最後のページ</a>
+      </div>
+    </section>
+  </main>
+</DefaultLayout>
+
+<style lang="scss">
+  #rtmp-specification {
+    section {
+      @include section-layout;
+    }
+
+    #rtmp-specifications {
+      list-style: none;
+    }
+
+    #page-links {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+</style>
+<style lang="scss" is:global>
+  #rtmp-specifications {
+    @include list-with-headings;
+  }
+</style>

@@ -2,17 +2,24 @@
   <h2>サイトマップ</h2>
   <div id="sitemap">
     <section>
-      <h3>ページ構成</h3>
+      <h3>ページ構成一覧</h3>
       <ul id="sitemap-pages">
         <li><a href="/">インデックス</a></li>
         <li><a href="/sheave-project">Sheave</a></li>
+        <li><a href="/articles">記事</a></li>
       </ul>
     </section>
     <section>
-      <h3>リポジトリ</h3>
+      <h3>リポジトリ一覧</h3>
       <ul id="sitemap-repositories">
-        <li class="github"><a href="https://github.com/t-matsudate/sheave">Sheave</a></li>
-        <li class="gitlab"><a href="https://gitlab.com/t-matsudate/vox-verse">VOX Verse</a></li>
+        <li><a href="https://github.com/t-matsudate/sheave">Sheave</a></li>
+        <li><a href="https://gitlab.com/t-matsudate/vox-verse">VOX Verse</a></li>
+      </ul>
+    </section>
+    <section>
+      <h3>記事カテゴリ一覧</h3>
+      <ul id="sitemap-article-categories">
+        <li><a href="/articles/rtmp-specification">RTMP仕様書 in 令和</a></li>
       </ul>
     </section>
   </div>
@@ -42,7 +49,7 @@
 
       @media (orientation: landscape) {
         display: grid;
-        grid-template-columns: repeat(2, 24%);
+        grid-template-columns: repeat(3, 24%);
         gap: 1rem;
       }
 

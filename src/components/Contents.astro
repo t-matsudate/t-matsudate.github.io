@@ -1,0 +1,17 @@
+---
+const {
+  id,
+  data
+} = Astro.props;
+
+const dateTime = data.published_date.toISOString();
+const year = data.published_date.getFullYear();
+const month = data.published_date.getMonth() + 1;
+const date = data.published_date.getDate();
+---
+<li id={id}>
+  <h3>{data.title}</h3>
+  <p>{data.description}</p>
+  <p>作成日時: <time datetime={dateTime}>{year + '年' + month + '月' + date + '日'}</time></p>
+  <a href={'/articles/rtmp-specification/' + id}>読む</a>
+</li>

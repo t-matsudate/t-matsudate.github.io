@@ -1,0 +1,29 @@
+---
+import { getEntry } from 'astro:content';
+import DefaultLayout from '@layouts/DefaultLayout.astro';
+
+const { data: headings } = await getEntry('headings', 'categories');
+---
+<DefaultLayout title="記事カテゴリ一覧" headings={headings}>
+  <main id="categories">
+    <section>
+      <h2>記事カテゴリ一覧</h2>
+      <article id="rtmp-specification">
+        <h3>RTMP仕様書 in 令和</h3>
+        <p>通信プロトコルRTMPの仕様(2025年時点)を整理した。</p>
+        <p><a href="/articles/rtmp-specification/">読む</a></p>
+      </article>
+    </section>
+  </main>
+</DefaultLayout>
+<style lang="scss">
+  #categories {
+    section {
+      @include section-layout;
+    }
+
+    article {
+      @include content-margin;
+    }
+  }
+</style>

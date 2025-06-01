@@ -3,32 +3,44 @@ import Header from '@components/Header.astro';
 import Menu from '@components/Menu.astro';
 import Footer from '@components/Footer.astro';
 
-const { title, headings, description } = Astro.props;
+const {
+  frontmatter,
+  headings
+} = Astro.props;
 const currentPath = Astro.routePattern;
 ---
 <!DOCTYPE html>
 <html prefix="og: https://ogp.me/ns#">
   <head>
-    <title>{title ? title + ' - Func::main' : 'Func::main'}</title>
+    <title>{frontmatter.title ? frontmatter.title + (frontmatter.section ? ' - ' + frontmatter.section : '') + ' - Func::main' : 'Func::main'}</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initail-scale=1" />
-    <meta name="description" content={description} />
+    <meta name="description" content={frontmatter.description} />
     <meta name="keywords" content="func,funchs,func_hs,func-hs,tsuyoshi,matsudate,tmatsudate,t-matsudate,剛志,松舘,松舘剛志,プログラミング,スマホ,スマートフォン,android,termux,ubuntu,rust,php,javascript,typescript,html,css" />
     <meta name="robots" content="index,follow" />
     <meta name="googlebot" content="index,follow" />
-    <meta property="og:title" content={title ? title + ' - Func::main' : 'Func::main'} />
-    <meta property="og:type" content="website" />
+    <meta property="og:title" content={frontmatter.title ? frontmatter.title + ' - Func::main' : 'Func::main'} />
+    <meta property="og:type" content="article" />
     <meta property="og:image" content="https://t-matsudate.github.io/images/myface.png" />
     <meta property="og:url" content={'https://t-matsudate.github.io' + currentPath} />
-    <meta property="og:description" content={description} />
+    <meta property="description" content={frontmatter.description} />
+    <meta property="article:published_time" content={frontmatter.published_time} />
+    <meta property="article:author:first_name" content="剛志"/>
+    <meta property="article:author:last_name" content="松舘" />
+    <meta property="article:author:username" content="t-matsudate" />
+    <meta property="article:author:gender" content="male" />
+    {frontmatter.tags.map(tag => <meta property="article:tag" content={tag} />)}
+    <meta property="article:section" content={frontmatter.section} />
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
   <body>
-    <div id="default-layout">
+    <div id="markdown-layout">
       <Header />
       <div>
         <Menu headings={headings} />
-        <slot />
+        <main class="markdown-body">
+          <slot />
+        </main>
         <Footer />
       </div>
     </div>
@@ -45,7 +57,9 @@ const currentPath = Astro.routePattern;
 
   main {
     z-index: 0;
-    margin-top: 3rem;
+    margin-top: 3rem !important;
+    padding: 2rem;
+    font-family: 'BIZ UD PMincho' !important;
   }
 
   :is(h1, h2) {
@@ -59,9 +73,25 @@ const currentPath = Astro.routePattern;
   :is(p, li, th, td) {
     line-height: 1.5;
   }
+
+  p:has(img) {
+    text-align: center;
+  }
+
+  code {
+    font-family: 'Source Code Pro';
+  }
+
+  table {
+    width: 100% !important;
+
+    th {
+      text-align: left;
+    }
+  }
 </style>
 <style lang="scss">
-  #default-layout {
+  #markdown-layout {
     display: grid;
     grid-template-rows: 3rem 1fr;
   }
