@@ -24,7 +24,7 @@
         "local": "git clone https://github.com/t-matsudate/sheave\ncd ./sheave/sheave-client\ncargo run -- --client-type publisher -f flv -i filename.flv -f flv rtmp://127.0.0.1:1935/ondemand/publishing-name"
       },
       "subscriber": {
-        "local": "git clone https://github.com/t-matsudate/sheave\ncd ./sheave/sheave-client\ncargo run -- --client-type subscriber -f flv -i filename.flv -f flv rtmp://127.0.0.1:1935/ondemand/stream-name"
+        "local": "git clone https://github.com/t-matsudate/sheave\ncd ./sheave/sheave-client\ncargo run -- --client-type subscriber -f flv -o filename.flv -f flv rtmp://127.0.0.1:1935/ondemand/stream-name"
       }
     }
   },
