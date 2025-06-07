@@ -32,9 +32,14 @@ const { data: headings } = await getEntry('headings', 'sheave');
           <Highlight language="bash">{sheave.usage.server.container}</Highlight>
         </li>
         <li>
-          <h3>クライアント</h3>
+          <h3>クライアント(発行者モード)</h3>
           <p>このリポジトリをそのまま使う場合</p>
-          <Highlight language="bash">{sheave.usage.client.local}</Highlight>
+          <Highlight language="bash">{sheave.usage.client.publisher.local}</Highlight>
+        </li>
+        <li>
+          <h3>クライアント(購読者モード)</h3>
+          <p>このリポジトリをそのまま使う場合</p>
+          <Highlight language="bash">{sheave.usage.client.subscriber.local}</Highlight>
         </li>
       </ul>
     </section>

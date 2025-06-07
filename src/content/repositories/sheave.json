@@ -16,11 +16,16 @@
   },
   "usage": {
     "server": {
-      "local": "git clone https://github.com/t-matsudate/sheave\ncd ./sheave/sheave-server\ncargo run -- --rtmp 127.0.0.1:1935",
-      "container": "docker run --rm -it -e HOST=127.0.0.1 -e PORT=1935 tmatsudate/sheave-server:latest"
+      "local": "git clone https://github.com/t-matsudate/sheave\ncd ./sheave/sheave-server\ncargo run -- --topic-database-url sqlite::memory: --listeners rtmp://127.0.0.1:1935/ondemand",
+      "container": "docker run --rm -it -e TOPIC_DATABASE_URL=sqlite::memory: -e LISTENERS=rtmp://127.0.0.1:1935/ondemand tmatsudate/sheave-server:latest"
     },
     "client": {
-      "local": "git clone https://github.com/t-matsudate/sheave\ncd ./sheave/sheave-client\ncargo run -- -f filename.flv -f flv rtmp://127.0.0.1"
+      "publisher": {
+        "local": "git clone https://github.com/t-matsudate/sheave\ncd ./sheave/sheave-client\ncargo run -- --client-type publisher -f flv -i filename.flv -f flv rtmp://127.0.0.1:1935/ondemand/publishing-name"
+      },
+      "subscriber": {
+        "local": "git clone https://github.com/t-matsudate/sheave\ncd ./sheave/sheave-client\ncargo run -- --client-type subscriber -f flv -i filename.flv -f flv rtmp://127.0.0.1:1935/ondemand/stream-name"
+      }
     }
   },
   "goals": {
@@ -36,10 +41,11 @@
       "RTMPハンドシェイクによる相互確認",
       "通信に必要な設定情報の交換",
       "音声/映像データの蓄積/公開",
-      "ロガーによる詳細出力"
+      "ロガーによる詳細出力",
+      "音声/映像データの購読"
     ],
     "wip": [
-      "音声/映像データの購読"
+      "音声/動画コーデックへの対応"
     ]
   },
   "license": {
