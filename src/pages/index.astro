@@ -77,6 +77,12 @@ const repositories = await getCollection('repositories');
         </li>
       ))}</ul>
     </section>
+    <section id="link-articles">
+      <h2>ブログ</h2>
+      <ul id="articles">
+        <li><a href="/articles/">カテゴリ一覧</a></li>
+      </ul>
+    </section>
     <section id="link-donation">
       <h2>寄付</h2>
       <ul id="donations">
@@ -136,6 +142,9 @@ const repositories = await getCollection('repositories');
       }
     }
 
+    #articles {
+      margin: 0 1rem;
+    }
   }
 </style>
 <style lang="scss" is:global>

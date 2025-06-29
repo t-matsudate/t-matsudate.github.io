@@ -4,8 +4,8 @@ import DefaultLayout from '@layouts/DefaultLayout.astro';
 import Contents from '@components/Contents.astro';
 
 export async function getStaticPaths({ paginate }) {
-  const articles = await getCollection('rtmpSpecifications');
-  articles.sort((articleA, articleB) => parseInt(articleA.id.split('-')[0]) - parseInt(articleB.id.split('-')[0]));
+  const articles = await getCollection('seekingJobsWithDisability');
+  articles.sort((articleA, articleB) => aricleB.published_date - articleA.published_date);
 
   return paginate(articles);
 }
@@ -15,14 +15,14 @@ const headings = page.data.map(article => ({
   depth: 3,
   slug: article.id,
   text: article.data.title
-}));
+}))
 ---
-<DefaultLayout title="RTMP仕様書 in 令和" headings={headings}>
-  <main id="rtmp-specification">
+<DefaultLayout title="障碍と就職活動" headings={headings}>
+  <main id="seeking-jobs-with-disability">
     <section>
       <h2>記事一覧</h2>
       <ul id="articles">
-      {page.data.map(article => <Contents category='rtmp-specification' id={article.id} data={article.data} />)}
+      {page.data.map(article => <Contents category='seeking-jobs-with-disability' id={article.id} data={article.data} />)}
       </ul>
       <div id="page-links">
         <a {page.url.first ? 'href=' + page.url.first : null}>最初のページ</a>
@@ -36,7 +36,7 @@ const headings = page.data.map(article => ({
 </DefaultLayout>
 
 <style lang="scss">
-  #rtmp-specification {
+  #seeking-jobs-with-disability {
     section {
       @include section-layout;
     }

@@ -1,5 +1,6 @@
 ---
 const {
+  category,
   id,
   data
 } = Astro.props;
@@ -13,5 +14,5 @@ const date = data.published_date.getDate();
   <h3>{data.title}</h3>
   <p>{data.description}</p>
   <p>作成日時: <time datetime={dateTime}>{year + '年' + month + '月' + date + '日'}</time></p>
-  <a href={'/articles/rtmp-specification/' + id}>読む</a>
+  <a href={`/articles/${category}/${id}`}>読む</a>
 </li>

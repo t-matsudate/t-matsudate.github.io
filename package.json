@@ -1,7 +1,7 @@
 {
   "name": "t-matsudate.github.io",
   "type": "module",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "scripts": {
     "add": "astro add",
     "build": "astro build",
@@ -21,7 +21,7 @@
     "@astrojs/mdx": "^4.3.0",
     "@astrojs/react": "^4.3.0",
     "@astrojs/sitemap": "^3.4.1",
-    "astro": "^5.9.1",
+    "astro": "^5.10.1",
     "highlight.js": "^11.11.1",
     "katex": "^0.16.22",
     "react": "^19.1.0",
@@ -40,7 +40,7 @@
     "remark-gfm": "^4.0.1",
     "remark-images": "^4.1.0",
     "remark-math": "^6.0.0",
-    "sass": "^1.86.3",
+    "sass": "^1.89.2",
     "typescript": "^5.8.3"
   }
 }

@@ -6,7 +6,7 @@ import {
 import MarkdownLayout from '@layouts/MarkdownLayout.astro';
 
 export async function getStaticPaths() {
-  const articles = await getCollection('rtmpSpecifications');
+  const articles = await getCollection('seekingJobsWithDisability');
 
   return articles.map(article => ({
     params: { id: article.id },

@@ -16,6 +16,11 @@
   },
   {
     "depth": 2,
+    "slug": "link-articles",
+    "text": "ブログ"
+  },
+  {
+    "depth": 2,
     "slug": "link-donation",
     "text": "寄付"
   }

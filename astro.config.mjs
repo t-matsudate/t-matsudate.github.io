@@ -66,6 +66,7 @@ export default defineConfig({
     }
   },
   redirects: {
-    '/articles/rtmp-specification/': '/articles/rtmp-specification/1'
+    '/articles/rtmp-specification/': '/articles/rtmp-specification/1',
+    '/articles/seeking-jobs-with-disability/': '/articles/seeking-jobs-with-disability/1'
   }
 });
